@@ -10,6 +10,10 @@ export class JugadorController {
   @Get(':pais')
   getJugadoresDePais(@Query('pais') pais: string) {}
 
+  //Retorna todos los jugadores con cierta posicion
+  @Get(':posicion')
+  getJugadoresConPosicion(@Query('posicion') posicion: string) {}
+
   //Retorna un jugador con un id determinado
   @Get(':id')
   getJugador(@Query('id') id: Number) {}
