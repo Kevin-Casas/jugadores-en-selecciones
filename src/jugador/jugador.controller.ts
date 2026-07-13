@@ -1,7 +1,10 @@
 import { Controller, Get, Query } from '@nestjs/common';
+import { JugadorService } from './jugador.service';
 
 @Controller('jugador')
 export class JugadorController {
+  constructor(private readonly jugadorService: JugadorService) {}
+
   //Retorna todos los jugadores en la base de datos
   @Get()
   getTodosLosJugadores() {}
