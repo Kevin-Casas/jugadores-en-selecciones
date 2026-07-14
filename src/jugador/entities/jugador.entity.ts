@@ -4,14 +4,14 @@ import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 export class Jugador {
 
   @PrimaryGeneratedColumn()
-  id: number;
+  id!: number;
 
   @Column()
-  nombre: string;
+  nombre!: string;
 
   @Column()
-  pais: string;
+  pais!: string;
 
   @Column()
-  posicion: string;
+  posicion!: string;
 }

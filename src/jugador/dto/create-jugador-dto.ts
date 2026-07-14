@@ -1,5 +1,5 @@
 export class CreateJugadorDto {
-  nombre: string;
-  pais: string;
-  posicion: string;
+  nombre!: string;
+  pais!: string;
+  posicion!: string;
 }
