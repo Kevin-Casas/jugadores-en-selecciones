@@ -1,23 +1,42 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
-interface Jugador {
-  id: number;
-  nombre: string;
-  posicion: string;
-  pais: string;
-}
+import { Jugador } from './entities/jugador.entity';
+import { CreateJugadorDto } from './dto/create-jugador-dto';
+import { UpdateJugadorDto } from './dto/update-jugador-dto';
 
 @Injectable()
 export class JugadorService {
-  //Retorna todos los jugadores de la base de datos
-  getTodosLosJugadores() {}
+  constructor(
+    @InjectRepository(Jugador)
+    private jugadorRepository: Repository<Jugador>,
+  ) {}
 
-  //Retorna todos los jugadores de cierto pais
-  getJugadoresDePais(pais: string) {}
+  //Crear Jugador con TypeORM
+  create(createJugadorDto: CreateJugadorDto) {
+    const jugador = this.jugadorRepository.create(createJugadorDto);
+    return this.jugadorRepository.save(jugador);
+  }
 
-  //Retorna todos los jugadores con cierta posicion
-  getJugadoresConPosicion(posicion: string) {}
+  //Retornar todos los Jugadores
+  findAll() {
+    return this.jugadorRepository.find();
+  }
 
-  //Retorna un jugador con un id determinado
-  getJugador(id: number) {}
+  //Retorna un Jugador a partir de su id si este existe
+  findOne(id: number) {
+    return this.jugadorRepository.findOne({ where: { id } });
+  }
+
+  //Actualiza los datos de un Jugador a partir de su id si este existe y lo retorna
+  async update(id: number, dto: UpdateJugadorDto) {
+    await this.jugadorRepository.update(id, dto);
+    return this.findOne(id);
+  }
+
+  //Borra un Jugador a apartir de su id si este existe
+  async remove(id: number) {
+    return this.jugadorRepository.delete(id);
+  }
 }
