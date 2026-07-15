@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
-@Entity('jugadores') //Tabla de Jugadores
+@Entity('jugadores_mundial_2026') //Tabla de Jugadores
 export class Jugador {
 
   @PrimaryGeneratedColumn()

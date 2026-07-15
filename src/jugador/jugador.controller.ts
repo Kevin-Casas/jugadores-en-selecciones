@@ -16,29 +16,17 @@ import { UpdateJugadorDto } from './dto/update-jugador-dto';
 export class JugadorController {
   constructor(private readonly jugadorService: JugadorService) {}
 
-  //Retorna todos los jugadores en la base de datos
+  //Retorna los jugadores si se ingresan filtros, caso contrario se retorna todos los jugadores que cumplan con los filtros
   @Get()
-  getTodosLosJugadores() {
-    return this.jugadorService.findAll();
-  }
-
-  //Retorna un jugador con un id determinado
-  @Get(':id')
-  getJugador(@Query('id') id: number) {
-    return this.jugadorService.findOne(id);
-  }
-
-  //Retorna todos los jugadores de cierto pais
-  @Get(':pais')
-  getJugadoresDePais(@Query('pais') pais: string) {
-    return this.jugadorService.findAllFromCountry(pais);
-  }
-
-  //Retorna todos los jugadores con cierta posicion
-  @Get(':posicion')
-  getJugadoresConPosicion(@Query('posicion') posicion: string) {
-    return this.jugadorService.findAllWithPosition(posicion);
-  }
+getJugadores(
+  @Query() filtros: { 
+    id?: string;
+    pais?: string;
+    posicion?: string;
+  },
+) {
+  return this.jugadorService.search(filtros);
+}
 
   //Agregar un jugador
   @Post(':id')

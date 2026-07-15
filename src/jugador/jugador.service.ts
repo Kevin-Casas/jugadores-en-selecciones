@@ -19,30 +19,32 @@ export class JugadorService {
     return this.jugadorRepository.save(jugador);
   }
 
-  //Retornar todos los Jugadores
-  findAll() {
-    return this.jugadorRepository.find();
+  //Retorna un Jugador a partir de los filtros ingresados
+  async search(filtros: any) {
+
+  const where: any = {};
+
+  if (filtros.id) {
+    where.id = Number(filtros.id);
   }
 
-  //Retorna un Jugador a partir de su id si este existe
-  findOne(id: number) {
-    return this.jugadorRepository.findOne({ where: { id } });
+  if (filtros.pais) {
+    where.pais = filtros.pais;
   }
 
-  //Retorna todos los jugadores de un pais determinado
-  findAllFromCountry(pais: string) {
-    return this.jugadorRepository.find({ where: { pais } });
+  if (filtros.posicion) {
+    where.posicion = filtros.posicion;
   }
 
-  //Retorna todos los jugadores con cierta posicion
-  findAllWithPosition(posicion: string) {
-    return this.jugadorRepository.find({ where: { posicion } });
-  }
+  return this.jugadorRepository.find({
+    where,
+  });
+}
 
   //Actualiza los datos de un Jugador a partir de su id si este existe y lo retorna
   async update(id: number, dto: UpdateJugadorDto) {
     await this.jugadorRepository.update(id, dto);
-    return this.findOne(id);
+    return this.search(id);
   }
 
   //Borra un Jugador a apartir de su id si este existe
