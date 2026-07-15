@@ -29,6 +29,16 @@ export class JugadorService {
     return this.jugadorRepository.findOne({ where: { id } });
   }
 
+  //Retorna todos los jugadores de un pais determinado
+  findAllFromCountry(pais: string) {
+    return this.jugadorRepository.find({ where: { pais } });
+  }
+
+  //Retorna todos los jugadores con cierta posicion
+  findAllWithPosition(posicion: string) {
+    return this.jugadorRepository.find({ where: { posicion } });
+  }
+
   //Actualiza los datos de un Jugador a partir de su id si este existe y lo retorna
   async update(id: number, dto: UpdateJugadorDto) {
     await this.jugadorRepository.update(id, dto);
