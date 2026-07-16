@@ -20,13 +20,17 @@ export class JugadorController {
   @Get()
 getJugadores(
   @Query() filtros: { 
-    id?: string;
     pais?: string;
     posicion?: string;
   },
 ) {
   return this.jugadorService.search(filtros);
 }
+
+  @Get(':id')
+  getJugador(@Query('id') id:string) {
+    return this.jugadorService.searchOne(Number(id))
+  }
 
   //Agregar un jugador
   @Post(':id')

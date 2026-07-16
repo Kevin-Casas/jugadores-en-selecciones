@@ -41,6 +41,11 @@ export class JugadorService {
   });
 }
 
+//Retorna un jugador a partir de su id
+async searchOne(id) {
+  return this.jugadorRepository.findOne({where: id})
+}
+
   //Actualiza los datos de un Jugador a partir de su id si este existe y lo retorna
   async update(id: number, dto: UpdateJugadorDto) {
     await this.jugadorRepository.update(id, dto);
