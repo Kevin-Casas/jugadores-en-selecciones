@@ -29,24 +29,25 @@ getJugadores(
 
   @Get(':id')
   getJugador(@Query('id') id:string) {
-    return this.jugadorService.searchOne(Number(id))
+    return this.jugadorService.searchOne(Number(id));
   }
 
   //Agregar un jugador
-  @Post(':id')
+  @Post('')
   crearJugador(@Body() dto: CreateJugadorDto) {
     return this.jugadorService.create(dto);
   }
 
   //Actualiza los datos de un jugador
-  @Put(':id')
-  actualizarJugador(@Param('id') id: number, @Body() dto: UpdateJugadorDto) {
-    return this.jugadorService.update(id, dto);
+  @Put('')
+  actualizarJugador(@Query('id') id: string, @Body() dto: UpdateJugadorDto) {
+    console.log(id, Number(id));
+    return this.jugadorService.update(Number(id), dto);
   }
 
   //Elimina un jugador
-  @Delete(':id')
-  borrarJugador(@Param('id') id: number) {
-    return this.jugadorService.remove(id);
+  @Delete('')
+  borrarJugador(@Query('id') id: string) {
+    return this.jugadorService.remove(Number(id));
   }
 }
