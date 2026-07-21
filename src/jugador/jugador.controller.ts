@@ -2,11 +2,11 @@ import {
   Body,
   Controller,
   Get,
-  Param,
   Post,
   Query,
   Put,
   Delete,
+  Param,
 } from '@nestjs/common';
 import { JugadorService } from './jugador.service';
 import { CreateJugadorDto } from './dto/create-jugador-dto';
@@ -18,17 +18,12 @@ export class JugadorController {
 
   //Retorna los jugadores si se ingresan filtros, caso contrario se retorna todos los jugadores que cumplan con los filtros
   @Get()
-getJugadores(
-  @Query() filtros: { 
-    pais?: string;
-    posicion?: string;
-  },
-) {
-  return this.jugadorService.search(filtros);
-}
+  getJugadores(@Query() filtros: { pais?: string; posicion?: string }) {
+    return this.jugadorService.search(filtros);
+  }
 
   @Get(':id')
-  getJugador(@Query('id') id:string) {
+  getJugador(@Param('id') id: string) {
     return this.jugadorService.searchOne(Number(id));
   }
 
@@ -39,15 +34,14 @@ getJugadores(
   }
 
   //Actualiza los datos de un jugador
-  @Put('')
-  actualizarJugador(@Query('id') id: string, @Body() dto: UpdateJugadorDto) {
-    console.log(id, Number(id));
+  @Put(':id')
+  actualizarJugador(@Param('id') id: string, @Body() dto: UpdateJugadorDto) {
     return this.jugadorService.update(Number(id), dto);
   }
 
   //Elimina un jugador
-  @Delete('')
-  borrarJugador(@Query('id') id: string) {
+  @Delete(':id')
+  borrarJugador(@Param('id') id: string) {
     return this.jugadorService.remove(Number(id));
   }
 }
