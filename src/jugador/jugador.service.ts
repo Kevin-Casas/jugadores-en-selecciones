@@ -1,7 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-
 import { Jugador } from './entities/jugador.entity';
 import { CreateJugadorDto } from './dto/create-jugador-dto';
 import { UpdateJugadorDto } from './dto/update-jugador-dto';
@@ -14,18 +17,23 @@ export class JugadorService {
   ) {}
 
   //Crear Jugador con TypeORM
-  create(createJugadorDto: CreateJugadorDto) {
+  async create(createJugadorDto: CreateJugadorDto) {
+    const jugadorExistente = await this.jugadorRepository.findOneBy({
+      nombre: createJugadorDto.nombre,
+      posicion: createJugadorDto.posicion,
+    });
+
+    if (jugadorExistente) {
+      throw new ConflictException('El Jugador ya existe');
+    }
+
     const jugador = this.jugadorRepository.create(createJugadorDto);
     return this.jugadorRepository.save(jugador);
   }
 
   //Retorna un Jugador a partir de los filtros ingresados
-  async search(filtros: any) {
+  search(filtros: any) {
     const where: any = {};
-
-    if (filtros.id) {
-      where.id = Number(filtros.id);
-    }
 
     if (filtros.pais) {
       where.pais = filtros.pais;
@@ -42,17 +50,31 @@ export class JugadorService {
 
   //Retorna un jugador a partir de su id
   async searchOne(id) {
-    return this.jugadorRepository.findOneBy({ id });
+    const jugador = await this.jugadorRepository.findOneBy({ id });
+
+    if (!jugador) {
+      throw new NotFoundException('Jugador no encontrado');
+    }
+    return jugador;
   }
 
   //Actualiza los datos de un Jugador a partir de su id si este existe y lo retorna
   async update(id, dto: UpdateJugadorDto) {
-    await this.jugadorRepository.update(id, dto);
-    return this.jugadorRepository.findOneBy({ id });
+    const jugador = await this.jugadorRepository.findOneBy({ id });
+
+    if (!jugador) {
+      throw new NotFoundException('Jugador no encontrado');
+    }
+    return this.jugadorRepository.update(id, dto);
   }
 
   //Borra un Jugador a apartir de su id si este existe
   async remove(id) {
+    const jugador = await this.jugadorRepository.findOneBy({ id });
+
+    if (!jugador) {
+      throw new NotFoundException('Jugador no encontrado');
+    }
     return this.jugadorRepository.delete(id);
   }
 }
