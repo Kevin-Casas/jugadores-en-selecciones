@@ -7,6 +7,7 @@ import {
   Put,
   Delete,
   Param,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { JugadorService } from './jugador.service';
 import { CreateJugadorDto } from './dto/create-jugador-dto';
@@ -23,8 +24,8 @@ export class JugadorController {
   }
 
   @Get(':id')
-  getJugador(@Param('id') id: string) {
-    return this.jugadorService.searchOne(Number(id));
+  getJugador(@Param('id', ParseIntPipe) id: number) {
+    return this.jugadorService.searchOne(id);
   }
 
   //Agregar un jugador
@@ -35,13 +36,13 @@ export class JugadorController {
 
   //Actualiza los datos de un jugador
   @Put(':id')
-  actualizarJugador(@Param('id') id: string, @Body() dto: UpdateJugadorDto) {
-    return this.jugadorService.update(Number(id), dto);
+  actualizarJugador(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateJugadorDto) {
+    return this.jugadorService.update(id, dto);
   }
 
   //Elimina un jugador
   @Delete(':id')
-  borrarJugador(@Param('id') id: string) {
-    return this.jugadorService.remove(Number(id));
+  borrarJugador(@Param('id', ParseIntPipe) id: number) {
+    return this.jugadorService.remove(id);
   }
 }
