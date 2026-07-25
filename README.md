@@ -96,6 +96,11 @@ Este proyecto busca servir como práctica para comprender conceptos fundamentale
 
 ## Versiones
 
+### Versión 1.2.1
+- Implementación de Logger Middleware.
+- Implementación de Validation Pipes.
+- Docker.
+
 ### Versión 1.1.0
 
 - Implementación del proyecto base con NestJS.
