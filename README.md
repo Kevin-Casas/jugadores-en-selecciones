@@ -96,17 +96,16 @@ Este proyecto busca servir como práctica para comprender conceptos fundamentale
 
 ## Versiones
 
-### Versión 1.2.1
-- Implementación de Logger Middleware.
-- Implementación de Validation Pipes.
-- Docker.
-
-### Versión 1.1.0
-
+### Versión 1.4.2
 - Implementación del proyecto base con NestJS.
 - Configuración de PostgreSQL mediante TypeORM.
 - Creación de la entidad **Jugador**.
 - Implementación de operaciones CRUD básicas para jugadores.
 - Implementación de excepciones simples para las operaciones CRUD.
+- Implementación de Logger Middleware.
+- Implementación de Validation Pipes.
+- Docker.
+- Implementación de Rate Limiting.
+- Implementación de Cache con cache-manager.
 
 ---
