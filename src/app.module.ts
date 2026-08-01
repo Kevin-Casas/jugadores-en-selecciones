@@ -6,12 +6,19 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { logger } from './middleware/logger.middleware';
 import { JugadorController } from './jugador/jugador.controller';
+import { seconds, ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { APP_GUARD } from '@nestjs/core';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true, envFilePath: '.env' }),
     TypeOrmModule.forRootAsync({
-      imports: [ConfigModule], //Cargar modulo para uso de archivo .env
+      imports: [
+        ConfigModule, //Cargar modulo para uso de archivo .env
+        ThrottlerModule.forRoot({
+          throttlers: [{ ttl: seconds(60), limit: 10 }],
+        }), //Rate Limit 10 request per minute
+      ],
       inject: [ConfigService], //Injectar
 
       useFactory: (configService: ConfigService) => ({
@@ -29,7 +36,7 @@ import { JugadorController } from './jugador/jugador.controller';
     JugadorModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, { provide: APP_GUARD, useClass: ThrottlerGuard }], //Implementacion de rate limit global
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
