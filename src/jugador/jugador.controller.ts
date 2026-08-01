@@ -9,13 +9,16 @@ import {
   Param,
   ParseIntPipe,
   ValidationPipe,
+  UseInterceptors,
 } from '@nestjs/common';
 import { JugadorService } from './jugador.service';
 import { CreateJugadorDto } from './dto/create-jugador-dto';
 import { UpdateJugadorDto } from './dto/update-jugador-dto';
 import { BuscarJugadoresDto } from './dto/get-jugadores-dto';
+import { CacheInterceptor } from '@nestjs/cache-manager';
 
 @Controller('jugador')
+@UseInterceptors(CacheInterceptor)
 export class JugadorController {
   constructor(private readonly jugadorService: JugadorService) {}
 

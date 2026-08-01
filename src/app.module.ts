@@ -8,16 +8,19 @@ import { logger } from './middleware/logger.middleware';
 import { JugadorController } from './jugador/jugador.controller';
 import { seconds, ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
+import { CacheModule } from '@nestjs/cache-manager';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true, envFilePath: '.env' }),
+    ThrottlerModule.forRoot({
+      //Rate Limit 10 request porm inuto
+      throttlers: [{ ttl: seconds(60), limit: 10 }],
+    }),
+    CacheModule.register({ isGlobal: true, ttl:5}), // Cache 5 segundos tiempo de vida, 100 elementos maximo por default
     TypeOrmModule.forRootAsync({
       imports: [
         ConfigModule, //Cargar modulo para uso de archivo .env
-        ThrottlerModule.forRoot({
-          throttlers: [{ ttl: seconds(60), limit: 10 }],
-        }), //Rate Limit 10 request per minute
       ],
       inject: [ConfigService], //Injectar
 
