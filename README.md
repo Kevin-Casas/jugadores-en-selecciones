@@ -9,6 +9,7 @@ API REST desarrollada con **NestJS** para la gestión de jugadores convocados a 
 | NestJS | Framework para el desarrollo de aplicaciones backend con Node.js. |
 | TypeORM | ORM para la gestión de entidades y acceso a la base de datos. |
 | PostgreSQL | Sistema de gestión de base de datos relacional. |
+| Swagger | Herramienta para documentación de endpoints. |
 
 ## Requisitos
 
