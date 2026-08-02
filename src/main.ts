@@ -11,7 +11,7 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle('Jugadores de Futbol en Selecciones')
     .setDescription('Descripcion de API')
-    .setVersion('1.4.1')
+    .setVersion('1.5.2')
     .addTag('Jugadores')
     .build();
 
