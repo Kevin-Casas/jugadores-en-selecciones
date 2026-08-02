@@ -31,7 +31,7 @@ export class JugadorService {
     return this.jugadorRepository.save(jugador);
   }
 
-  //Retorna un Jugador a partir de los filtros ingresados
+  //Retorna Jugadores a partir de los filtros ingresados
   search(filtros: any) {
     const where: any = {};
 
@@ -45,6 +45,7 @@ export class JugadorService {
 
     return this.jugadorRepository.find({
       where,
+      order: { pais: 'ASC' },
     });
   }
 
