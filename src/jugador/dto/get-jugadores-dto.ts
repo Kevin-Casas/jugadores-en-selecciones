@@ -1,6 +1,14 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsIn, IsInt, IsOptional, IsPositive, Matches, Max, Min } from 'class-validator';
+import {
+  IsIn,
+  IsInt,
+  IsOptional,
+  IsPositive,
+  Matches,
+  Max,
+  Min,
+} from 'class-validator';
 
 export class BuscarJugadoresDto {
   @ApiPropertyOptional()
@@ -17,28 +25,63 @@ export class BuscarJugadoresDto {
 
   @ApiPropertyOptional()
   @IsOptional()
-  @IsPositive()
-  goles?: number;
+  @Type(() => Number)
+  @Min(0)
+  golesMax?: number;
 
   @ApiPropertyOptional()
   @IsOptional()
-  @IsPositive()
-  asistencias?: number;
+  @Type(() => Number)
+  @Min(0)
+  golesMin?: number;
 
   @ApiPropertyOptional()
   @IsOptional()
-  @IsPositive()
-  tarjetas_rojas?: number;
+  @Type(() => Number)
+  @Min(0)
+  asistenciasMax?: number;
 
   @ApiPropertyOptional()
   @IsOptional()
-  @IsPositive()
-  tarjetas_amarillas?: number;
+  @Type(() => Number)
+  @Min(0)
+  asistenciasMin?: number;
 
   @ApiPropertyOptional()
   @IsOptional()
-  @IsPositive()
-  partidos_jugados?: number;
+  @Type(() => Number)
+  @Min(0)
+  tarjetas_rojasMax?: number;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @Type(() => Number)
+  @Min(0)
+  tarjetas_rojasMin?: number;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @Type(() => Number)
+  @Min(0)
+  tarjetas_amarillasMax?: number;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @Type(() => Number)
+  @Min(0)
+  tarjetas_amarillasMin?: number;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @Type(() => Number)
+  @Min(0)
+  partidos_jugadosMax?: number;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @Type(() => Number)
+  @Min(0)
+  partidos_jugadosMin?: number;
 
   @IsOptional()
   @Type(() => Number)
