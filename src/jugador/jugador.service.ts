@@ -33,7 +33,7 @@ export class JugadorService {
   }
 
   //Retorna Jugadores a partir de los filtros ingresados
-  search(filtros: BuscarJugadoresDto) {
+  async search(filtros: BuscarJugadoresDto) {
     const where: any = {};
 
     if (filtros.pais) {
@@ -44,12 +44,22 @@ export class JugadorService {
       where.posicion = filtros.posicion;
     }
 
-    return this.jugadorRepository.find({
+    const [items, total] = await this.jugadorRepository.findAndCount({
       where,
       skip: (filtros.page - 1) * filtros.limit,
       take: filtros.limit,
       order: { pais: 'ASC' },
     });
+
+    return {
+      items,
+      pagination: {
+        page: filtros.page,
+        limit: filtros.limit,
+        total,
+        totalPages: Math.ceil(total / filtros.limit),
+      },
+    };
   }
 
   //Retorna un jugador a partir de su id
