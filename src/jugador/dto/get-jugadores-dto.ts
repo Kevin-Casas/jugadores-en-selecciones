@@ -1,6 +1,6 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsIn, IsInt, IsOptional, Matches, Max, Min } from 'class-validator';
+import { IsIn, IsInt, IsOptional, IsPositive, Matches, Max, Min } from 'class-validator';
 
 export class BuscarJugadoresDto {
   @ApiPropertyOptional()
@@ -17,22 +17,27 @@ export class BuscarJugadoresDto {
 
   @ApiPropertyOptional()
   @IsOptional()
+  @IsPositive()
   goles?: number;
 
   @ApiPropertyOptional()
   @IsOptional()
+  @IsPositive()
   asistencias?: number;
 
   @ApiPropertyOptional()
   @IsOptional()
+  @IsPositive()
   tarjetas_rojas?: number;
 
   @ApiPropertyOptional()
   @IsOptional()
+  @IsPositive()
   tarjetas_amarillas?: number;
 
   @ApiPropertyOptional()
   @IsOptional()
+  @IsPositive()
   partidos_jugados?: number;
 
   @IsOptional()
