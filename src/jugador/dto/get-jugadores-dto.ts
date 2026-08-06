@@ -1,5 +1,6 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
-import { IsIn, IsOptional, Matches } from 'class-validator';
+import { Type } from 'class-transformer';
+import { IsIn, IsInt, IsOptional, Matches, Max, Min } from 'class-validator';
 
 export class BuscarJugadoresDto {
   @ApiPropertyOptional()
@@ -9,8 +10,21 @@ export class BuscarJugadoresDto {
   })
   pais?: string;
 
-   @ApiPropertyOptional()
+  @ApiPropertyOptional()
   @IsOptional()
   @IsIn(['Delantero', 'Arquero', 'Defensor', 'Mediocampista'])
   posicion?: string;
+
+  @IsOptional()
+  @Type(() => Number)
+  @IsInt()
+  @Min(1)
+  page = 1;
+
+  @IsOptional()
+  @Type(() => Number)
+  @IsInt()
+  @Min(1)
+  @Max(100)
+  limit = 25;
 }

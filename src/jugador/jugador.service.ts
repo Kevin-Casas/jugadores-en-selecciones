@@ -8,6 +8,7 @@ import { Repository } from 'typeorm';
 import { Jugador } from './entities/jugador.entity';
 import { CreateJugadorDto } from './dto/create-jugador-dto';
 import { UpdateJugadorDto } from './dto/update-jugador-dto';
+import { BuscarJugadoresDto } from './dto/get-jugadores-dto';
 
 @Injectable()
 export class JugadorService {
@@ -32,7 +33,7 @@ export class JugadorService {
   }
 
   //Retorna Jugadores a partir de los filtros ingresados
-  search(filtros: any) {
+  search(filtros: BuscarJugadoresDto) {
     const where: any = {};
 
     if (filtros.pais) {
@@ -45,6 +46,8 @@ export class JugadorService {
 
     return this.jugadorRepository.find({
       where,
+      skip: (filtros.page - 1) * filtros.limit,
+      take: filtros.limit,
       order: { pais: 'ASC' },
     });
   }
