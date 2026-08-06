@@ -73,7 +73,7 @@ http://localhost:3000
 
 ## Entidad Jugador
 
-La entidad principal del proyecto representa a un jugador perteneciente a una selección nacional.
+La entidad principal del proyecto representa a un jugador perteneciente a un equipo de futbol.
 
 | Campo | Descripción |
 |--------|-------------|
