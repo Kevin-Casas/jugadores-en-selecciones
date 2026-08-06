@@ -36,19 +36,39 @@ export class JugadorService {
   async search(filtros: BuscarJugadoresDto) {
     const where: any = {};
 
-    if (filtros.pais) {
-      where.pais = filtros.pais;
+    if (filtros.equipo) {
+      where.equipo = filtros.equipo;
     }
 
     if (filtros.posicion) {
       where.posicion = filtros.posicion;
     }
 
+    if (filtros.goles) {
+      where.goles = filtros.goles;
+    }
+
+    if (filtros.asistencias) {
+      where.asistencias = filtros.asistencias;
+    }
+
+    if (filtros.tarjetas_rojas) {
+      where.tarjetas_rojas = filtros.tarjetas_rojas;
+    }
+
+    if (filtros.tarjetas_amarillas) {
+      where.tarjetas_amarillas = filtros.tarjetas_amarillas;
+    }
+
+    if (filtros.partidos_jugados) {
+      where.partidos_jugados = filtros.partidos_jugados;
+    }
+
     const [items, total] = await this.jugadorRepository.findAndCount({
       where,
       skip: (filtros.page - 1) * filtros.limit,
       take: filtros.limit,
-      order: { pais: 'ASC' },
+      order: { equipo: 'ASC' },
     });
 
     return {

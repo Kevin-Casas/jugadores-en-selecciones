@@ -6,14 +6,34 @@ export class BuscarJugadoresDto {
   @ApiPropertyOptional()
   @IsOptional()
   @Matches(/^[A-Za-zÀ-ÿ\s]+$/, {
-    message: 'pais no puede contener letras o simbolos',
+    message: 'equipo no puede contener letras o simbolos',
   })
-  pais?: string;
+  equipo?: string;
 
   @ApiPropertyOptional()
   @IsOptional()
   @IsIn(['Delantero', 'Arquero', 'Defensor', 'Mediocampista'])
   posicion?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  goles?: number;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  asistencias?: number;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  tarjetas_rojas?: number;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  tarjetas_amarillas?: number;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  partidos_jugados?: number;
 
   @IsOptional()
   @Type(() => Number)

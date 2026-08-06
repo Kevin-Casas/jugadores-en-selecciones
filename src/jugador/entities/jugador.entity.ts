@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
-@Entity('jugadores') //Tabla de Jugadores
+@Entity('jugadores_futbol') //Tabla de Jugadores
 export class Jugador {
 
   @PrimaryGeneratedColumn()
@@ -10,8 +10,23 @@ export class Jugador {
   nombre!: string;
 
   @Column()
-  pais!: string;
+  equipo!: string;
 
   @Column()
   posicion!: string;
+
+  @Column()
+  goles!: number;
+
+  @Column()
+  asistencias!: number;
+
+  @Column()
+  tarjetas_rojas!: number;
+
+  @Column()
+  tarjetas_amarillas!: number;
+
+  @Column()
+  partidos_jugados!: number;
 }
