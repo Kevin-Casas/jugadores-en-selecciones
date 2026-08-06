@@ -97,7 +97,7 @@ Este proyecto busca servir como práctica para comprender conceptos fundamentale
 
 ## Versiones
 
-### Versión 1.7.2
+### Versión 2.0.0
 - Implementación del proyecto base con NestJS.
 - Configuración de PostgreSQL mediante TypeORM.
 - Creación de la entidad **Jugador**.
@@ -111,5 +111,6 @@ Este proyecto busca servir como práctica para comprender conceptos fundamentale
 - Implementación de Swagger.
 - Implementación de Helmet
 - Implementación de paginación.
+- Inclución de campos de datos reales para jugadores.
 
 ---
