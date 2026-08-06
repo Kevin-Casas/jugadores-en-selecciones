@@ -16,7 +16,7 @@ import { HealthModule } from './health/health.module';
     ConfigModule.forRoot({ isGlobal: true, envFilePath: '.env' }),
     ThrottlerModule.forRoot({
       //Rate Limit 10 request porm inuto
-      throttlers: [{ ttl: seconds(60), limit: 10 }],
+      throttlers: [{ ttl: seconds(60), limit: 100 }],
     }),
     CacheModule.register({ isGlobal: true, ttl:5}), // Cache 5 segundos tiempo de vida, 100 elementos maximo por default
     TypeOrmModule.forRootAsync({

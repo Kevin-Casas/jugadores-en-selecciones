@@ -9,11 +9,16 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.use(helmet());
   app.useGlobalInterceptors(new TransformInterceptor());
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      transform: true,
+    }),
+  );
   const config = new DocumentBuilder()
     .setTitle('Jugadores de Futbol en Selecciones')
     .setDescription('Descripcion de API')
-    .setVersion('1.7.2')
+    .setVersion('2.0.0')
     .addTag('Jugadores')
     .build();
 
