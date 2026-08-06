@@ -41,7 +41,7 @@ npm install
 
 4. Configura las variables de entorno.
 
-Crea un archivo `.env` en la raíz del proyecto con la configuración de tu base de datos.
+Crea un archivo `.env` en la raíz del proyecto con la configuración de tu base de datos. Ejemplo:
 
 ```env
 DB_HOST=localhost
@@ -77,13 +77,18 @@ La entidad principal del proyecto representa a un jugador perteneciente a una se
 
 | Campo | Descripción |
 |--------|-------------|
-| Nombre | Nombre completo del jugador. |
-| País | Selección nacional a la que pertenece. |
-| Posición | Posición de juego del jugador. |
+| nombre | Nombre completo del jugador. |
+| equipo | Equipo al que pertenece. |
+| posicion | Posición de juego del jugador. |
+| goles | Goles realizados por el jugador. |
+| asistencias | Asistencias realizadas por el jugador. |
+| tarjetas_rojas | Tarjetas Rojas obtenidas por jugador. |
+| tarjetas_amarillas | Tarjetas Amarillas obtenidas por jugador. |
+| partidos_jugados | Cantidad de partidos jugados por el Jugador. |
 
 ## Objetivos del proyecto
 
-Este proyecto busca servir como práctica para comprender conceptos fundamentales de NestJS, entre ellos:
+Este proyecto busca servir como práctica para comprender conceptos fundamentales del desarrollo de aplicaciones con NestJS, entre ellos:
 
 - Creación de proyectos con NestJS.
 - Organización por módulos.
@@ -94,6 +99,10 @@ Este proyecto busca servir como práctica para comprender conceptos fundamentale
 - Definición de entidades.
 - Inyección de dependencias.
 - Buenas prácticas en la estructura de un proyecto backend.
+- Validation Pipes.
+- Interceptors.
+- Middleware.
+- Docker.
 
 ## Versiones
 
