@@ -1,6 +1,6 @@
 {
   "name": "jugadores-en-selecciones",
-  "version": "1.6.2",
+  "version": "1.7.2",
   "description": "Simple aplicacion para manejar datos de jugadores de futbol",
   "author": "Kevin Casas",
   "private": true,
