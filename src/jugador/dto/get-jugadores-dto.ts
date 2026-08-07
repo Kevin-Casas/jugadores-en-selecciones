@@ -4,13 +4,19 @@ import {
   IsIn,
   IsInt,
   IsOptional,
-  IsPositive,
+  IsString,
   Matches,
   Max,
   Min,
 } from 'class-validator';
 
 export class BuscarJugadoresDto {
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  nombre?: string;
+
   @ApiPropertyOptional()
   @IsOptional()
   @Matches(/^[A-Za-zÀ-ÿ\s]+$/, {
