@@ -4,7 +4,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Between, LessThanOrEqual, MoreThanOrEqual, Repository } from 'typeorm';
+import { Between, LessThanOrEqual, Like, MoreThanOrEqual, Repository } from 'typeorm';
 import { Jugador } from './entities/jugador.entity';
 import { CreateJugadorDto } from './dto/create-jugador-dto';
 import { UpdateJugadorDto } from './dto/update-jugador-dto';
@@ -35,6 +35,10 @@ export class JugadorService {
   //Retorna Jugadores a partir de los filtros ingresados
   async search(filtros: BuscarJugadoresDto) {
     const where: any = {};
+
+    if (filtros.nombre) {
+      where.nombre = Like(filtros.nombre);
+    }
 
     if (filtros.equipo) {
       where.equipo = filtros.equipo;
