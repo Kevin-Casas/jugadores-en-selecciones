@@ -4,9 +4,16 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Between, LessThanOrEqual, Like, MoreThanOrEqual, Repository } from 'typeorm';
+import {
+  Between,
+  LessThanOrEqual,
+  Like,
+  MoreThanOrEqual,
+  Repository,
+} from 'typeorm';
 import { Jugador } from './entities/jugador.entity';
 import { CreateJugadorDto } from './dto/create-jugador-dto';
+import { CreateJugadoresDto } from './dto/create-jugador-dto-bulk';
 import { UpdateJugadorDto } from './dto/update-jugador-dto';
 import { BuscarJugadoresDto } from './dto/get-jugadores-dto';
 
@@ -30,6 +37,11 @@ export class JugadorService {
 
     const jugador = this.jugadorRepository.create(createJugadorDto);
     return this.jugadorRepository.save(jugador);
+  }
+
+  //Crear multiples jugadores
+  async createBulk(jugadores: CreateJugadorDto[]) {
+    return this.jugadorRepository.save(jugadores);
   }
 
   //Retorna Jugadores a partir de los filtros ingresados
@@ -68,7 +80,10 @@ export class JugadorService {
 
     //Filtro para tarjetas rojas
     if (filtros.tarjetas_rojasMin && filtros.tarjetas_rojasMax) {
-      where.goles = Between(filtros.tarjetas_rojasMin, filtros.tarjetas_rojasMax);
+      where.goles = Between(
+        filtros.tarjetas_rojasMin,
+        filtros.tarjetas_rojasMax,
+      );
     } else if (filtros.tarjetas_rojasMin) {
       where.goles = MoreThanOrEqual(filtros.tarjetas_rojasMin);
     } else if (filtros.tarjetas_rojasMax) {
@@ -77,7 +92,10 @@ export class JugadorService {
 
     //Filtro para tarjetas amarillas
     if (filtros.tarjetas_amarillasMin && filtros.tarjetas_amarillasMax) {
-      where.goles = Between(filtros.tarjetas_amarillasMin, filtros.tarjetas_amarillasMax);
+      where.goles = Between(
+        filtros.tarjetas_amarillasMin,
+        filtros.tarjetas_amarillasMax,
+      );
     } else if (filtros.tarjetas_amarillasMin) {
       where.goles = MoreThanOrEqual(filtros.tarjetas_amarillasMin);
     } else if (filtros.tarjetas_amarillasMax) {
@@ -86,7 +104,10 @@ export class JugadorService {
 
     //Filtro para partidos jugados
     if (filtros.partidos_jugadosMin && filtros.partidos_jugadosMax) {
-      where.goles = Between(filtros.partidos_jugadosMin, filtros.partidos_jugadosMax);
+      where.goles = Between(
+        filtros.partidos_jugadosMin,
+        filtros.partidos_jugadosMax,
+      );
     } else if (filtros.partidos_jugadosMin) {
       where.goles = MoreThanOrEqual(filtros.partidos_jugadosMin);
     } else if (filtros.partidos_jugadosMax) {

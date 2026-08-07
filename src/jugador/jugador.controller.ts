@@ -16,6 +16,7 @@ import { CreateJugadorDto } from './dto/create-jugador-dto';
 import { UpdateJugadorDto } from './dto/update-jugador-dto';
 import { BuscarJugadoresDto } from './dto/get-jugadores-dto';
 import { CacheInterceptor } from '@nestjs/cache-manager';
+import { CreateJugadoresDto } from './dto/create-jugador-dto-bulk';
 
 @Controller('jugador')
 @UseInterceptors(CacheInterceptor)
@@ -46,6 +47,12 @@ export class JugadorController {
   @Post('')
   crearJugador(@Body() dto: CreateJugadorDto) {
     return this.jugadorService.create(dto);
+  }
+
+  //Agregar multiples jugadores
+  @Post('bulk')
+  crearJugadores(@Body() dto: CreateJugadoresDto) {
+    return this.jugadorService.createBulk(dto.items)
   }
 
   //Actualiza los datos de un jugador
